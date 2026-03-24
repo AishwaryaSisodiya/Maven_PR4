@@ -1,11 +1,15 @@
 pipeline {
     agent any
 
+    options {
+        skipDefaultCheckout(true)
+    }
+
     stages {
 
         stage('Checkout') {
             steps {
-                git 'https://github.com/AishwaryaSisodiya/Maven_PR4.git'
+                git branch: 'main', url: 'https://github.com/AishwaryaSisodiya/Maven_PR4.git'
             }
         }
 
