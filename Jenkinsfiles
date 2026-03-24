@@ -2,18 +2,21 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven3'   // Name must match Maven configured in Jenkins Global Tool Configuration
+        maven 'Maven3'   // Must match EXACT name in Jenkins Global Tool Config
     }
 
     stages {
+
         stage('Checkout') {
             steps {
+                // Pull code from configured repo
                 checkout scm
             }
         }
 
         stage('Build') {
             steps {
+                // Windows command
                 bat 'mvn clean compile'
             }
         }
@@ -22,6 +25,21 @@ pipeline {
             steps {
                 bat 'mvn test'
             }
+        }
+
+        stage('Package') {
+            steps {
+                bat 'mvn package'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Build Successful'
+        }
+        failure {
+            echo 'Build Failed'
         }
     }
 }
