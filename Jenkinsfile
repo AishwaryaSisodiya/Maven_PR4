@@ -1,11 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'Maven3'
-        jdk 'JDK17'
-    }
-
     stages {
 
         stage('Checkout') {
@@ -30,15 +25,6 @@ pipeline {
             steps {
                 bat 'mvn package'
             }
-        }
-    }
-
-    post {
-        success {
-            echo 'BUILD SUCCESS'
-        }
-        failure {
-            echo 'BUILD FAILED'
         }
     }
 }
